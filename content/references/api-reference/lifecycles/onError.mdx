@@ -1,1 +1,38 @@
 <Title>onError</Title>
+
+This is a lifecycle function that is run in the browser, it registers an error handler function that executes when a component in the child scope errors. 
+
+Only the error handlers in the nearest scope are executed, meaning that if you have an error handler that is deeply nested in child components it will most likely not be executed. In order to execute deeply nested handlers you can rethrow to send it up the hierarchy.
+
+### Typescript Function Signature
+
+```ts
+function onError(fn: (err: any) => void): void;
+```
+
+### Example
+
+```tsx
+import {onError} from 'solid-js'
+
+function MainComponent() {
+  onError((error) => console.log(error)) // "Random error that could happenn" will be logged
+
+  return (
+    <>
+      <h1>I will be displayed perfectly fine, however the component under me will not be displayed because it throws an error</h1>
+      <ChildComponent/>
+    </>
+  )
+}
+
+function ChildComponent() {
+  throw 'Random error that could happen'
+
+  return (
+    <h1>I will not be displayed because I threw an error</h1>
+  )
+}
+```
+
+In the code above the `onError` function used in the `MainComponent` uses the error thrown in the immediate child scope as an argument which can be used in an error dialog or just logged to the console.

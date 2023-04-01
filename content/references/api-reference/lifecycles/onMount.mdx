@@ -1,6 +1,6 @@
 <Title>onMount</Title>
 
-Lifecycle method run in the browser that registers a function that runs after the initial render and elements have been mounted.
+Lifecycle methods run in the browser that registers a function that runs after the initial render and elements have been mounted.
 Ideal for using refs and managing other one-time side effects.
 
 You can be confident that this method will run only once after initial rendering is done and won't run on the server.
@@ -9,7 +9,7 @@ It's an alias for an effect that is non-tracking, meaning that it is equivalent 
 
 While it can be used to perform data fetching, it is best to use Solid's resources with `createResource` for that task.
 
-## TypeScript Function Signature
+### TypeScript Function Signature
 
 ```typescript
 function onMount(fn: () => void): void;
